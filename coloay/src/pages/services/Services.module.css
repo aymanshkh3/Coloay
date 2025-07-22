@@ -1,0 +1,91 @@
+/* src/components/Services/Services.module.css */
+
+.servicesSection {
+  padding: 6rem 0;
+  background-color: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+}
+
+.titleContainer {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+/* Scroll animation setup */
+.scrollAnimate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scrollAnimate.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardsGrid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card {
+  background: radial-gradient(ellipse at top, #222, #111);
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Glowing border effect on hover */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background: linear-gradient(90deg, #e151ff, #9c83ff) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.cardIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #9c83ff;
+}
+
+.card h3 {
+  margin-bottom: 1rem;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.card p {
+  color: #bbbbbb;
+  font-size: 1rem;
+  line-height: 1.6;
+}
