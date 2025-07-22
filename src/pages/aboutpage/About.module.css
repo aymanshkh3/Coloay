@@ -1,0 +1,76 @@
+/* src/components/About/About.module.css */
+
+.aboutSection {
+  padding: 8rem 0;
+  background-color: #0a0a0a;
+  position: relative; /* Needed for the background glow */
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Background glow effect */
+.aboutSection::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(
+    circle,
+    rgba(156, 131, 255, 0.1), /* Use theme color */
+    transparent 70%
+  );
+  filter: blur(100px);
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+/* Scroll animation setup */
+.scrollAnimate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scrollAnimate.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animate the background glow when the section becomes visible */
+.scrollAnimate.animate::before {
+  opacity: 1;
+}
+
+/* Ensure content is above the glow */
+.aboutSection > .container {
+  position: relative;
+  z-index: 1;
+  max-width: 800px; /* Constrain the width of the content */
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  /* Gradient text effect */
+  background: linear-gradient(90deg, #e151ff, #9c83ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #e0e0e0;
+  margin-bottom: 2rem;
+}
+
+.description {
+  color: #bbbbbb;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
