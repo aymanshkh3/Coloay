@@ -1,0 +1,112 @@
+/* src/components/Hero/Hero.module.css */
+
+/* NOTE: For the "aeonik" font to work, you must import it. 
+  You can do this via a <link> in your index.html or an @import here, like:
+  @import url('URL_TO_AEONIK_FONT'); 
+*/
+
+.hero {
+  font-family: "aeonik", "aeonik Fallback", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background-color: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- STYLES for Scene Containers --- */
+.sceneContainerTop,
+.sceneContainerLeft,
+.sceneContainerRight {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.sceneContainerTop {
+  /* MODIFIED: Moved component higher */
+  top: -35%;
+  left: 42%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.sceneContainerLeft {
+  /* MODIFIED: Swapped to the right side */
+  right: 35%;
+  top: 45%;
+  transform: translateY(-50%);
+  height: 70vh;
+}
+
+.sceneContainerRight {
+  /* MODIFIED: Swapped to the left side */
+  left: 35%;
+  top: 30%;
+  transform: translateY(-50%);
+  height: 70vh;
+}
+
+/* --- Layering for Hero Content --- */
+.heroContent {
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2; /* Ensures content is on top of the scenes */
+}
+
+.hero h1 {
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+}
+
+.gradientText {
+  background: linear-gradient(
+    50deg,
+    #714dff,
+    #9c83ff 31.28%,
+    #e151ff 77.97%,
+    #fff759 95.64%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.3));
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: #a0a0a0;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.heroCta {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+}
+
+.heroCta:hover {
+  background-color: #f0f0f0;
+}

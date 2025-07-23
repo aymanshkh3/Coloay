@@ -1,0 +1,114 @@
+/* src/components/Header/Header.module.css */
+
+.header {
+  font-family: "aeonik", "aeonik Fallback", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  background: rgba(18, 18, 18, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 100%;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.navSection {
+  display: flex;
+  align-items: center;
+}
+
+.navCenter {
+  justify-content: center;
+}
+
+.navRight {
+  justify-content: flex-end;
+}
+
+.logo {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navLinks li a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.navLinks li a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* This is the base style for the underline, hidden by default */
+.navLinks li a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(90deg, #9c83ff, #e151ff);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+/* Style for the active link */
+.navLinks li a.active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* This rule makes the underline appear ONLY for the active link */
+.navLinks li a.active::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.demoBtn {
+  background: #ffffff;
+  color: #000000;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+.demoBtn:hover {
+  background: #dcdcdc;
+  transform: translateY(-1px);
+}
+@media (max-width: 768px) {
+  .demoBtn {
+    display: none;
+  }
+}
