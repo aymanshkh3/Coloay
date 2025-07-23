@@ -1,5 +1,3 @@
-// src/components/Contact/Contact.jsx (Refactored)
-
 import React, { useState } from "react";
 import {
   FiUser,
@@ -13,7 +11,6 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import validator from "validator";
 
-// Variants for the animations
 const containerVariant = {
   hidden: { opacity: 0 },
   visible: {
@@ -36,35 +33,56 @@ const Contact = () => {
     message: "",
   });
 
-  // This function can stay the same
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === "user_phone") {
+      if (/^\d{0,10}$/.test(value)) {
+        setFormData({ ...formData, [name]: value });
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
-  // This function can stay the same
   const showNotification = (message, type) => {
     setNotification({ message, type });
     setTimeout(() => setNotification({ message: "", type: "" }), 3000);
   };
 
-  // This function can stay the same
   const handleSubmit = (e) => {
     e.preventDefault();
     const { user_name, user_email, user_phone, message } = formData;
 
-    if (!user_name || !user_email || !user_phone || !message) {
-      return showNotification("Please fill all fields", "error");
+    if (!user_name || !user_email || !message) {
+      return showNotification("Name, email, and message are required", "error");
     }
+
     if (!validator.isEmail(user_email)) {
       return showNotification("Enter a valid email", "error");
     }
 
-    // Remember to replace with your actual EmailJS credentials
+    if (user_phone && user_phone.length !== 10) {
+      return showNotification(
+        "Phone number must be exactly 10 digits",
+        "error"
+      );
+    }
+
+    const combinedMessage = user_phone
+      ? `Phone: ${user_phone}\n\nMessage: ${message}`
+      : message;
+
+    const emailParams = {
+      name: user_name,
+      email: user_email,
+      message: combinedMessage,
+    };
+
     emailjs
       .send(
         "service_c3sk3c1",
-        "template_yhsh3no",
-        formData,
+        "template_cg3b99k",
+        emailParams,
         "gKbFEQhoxU7VWoXg-"
       )
       .then(() => {
@@ -82,9 +100,8 @@ const Contact = () => {
   };
 
   return (
-    // We've added the id and Framer Motion's animation props here
     <motion.section
-      id="contact" // The fix for your navigation issue
+      id="contact"
       className={styles.contactSection}
       initial="hidden"
       whileInView="visible"
@@ -97,7 +114,6 @@ const Contact = () => {
 
       <motion.div className={styles.formWrapper} variants={itemVariant}>
         <form className={styles.contactForm} onSubmit={handleSubmit}>
-          {/* Your form inputs remain the same */}
           <div className={styles.inputGroup}>
             <input
               className={styles.inputField}
@@ -109,6 +125,7 @@ const Contact = () => {
             />
             <FiUser className={styles.inputIcon} />
           </div>
+
           <div className={styles.inputGroup}>
             <input
               className={styles.inputField}
@@ -120,17 +137,19 @@ const Contact = () => {
             />
             <FiMail className={styles.inputIcon} />
           </div>
+
           <div className={styles.inputGroup}>
             <input
               className={styles.inputField}
               type="text"
               name="user_phone"
-              placeholder="Phone Number"
+              placeholder="Your Phone Number (optional)"
               value={formData.user_phone}
               onChange={handleChange}
             />
             <FiPhone className={styles.inputIcon} />
           </div>
+
           <div className={styles.inputGroup}>
             <textarea
               className={styles.textareaField}
@@ -142,13 +161,13 @@ const Contact = () => {
             ></textarea>
             <FiMessageSquare className={styles.inputIcon} />
           </div>
+
           <button type="submit" className={styles.submitBtn}>
             <FiSend /> Send Message
           </button>
         </form>
       </motion.div>
 
-      {/* The notification logic remains the same */}
       {notification.message && (
         <div
           className={`${styles.notification} ${
